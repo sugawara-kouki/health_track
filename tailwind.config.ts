@@ -6,7 +6,7 @@ export default {
     './pages/**/*.vue',
     './plugins/**/*.{js,ts}',
     './app.vue',
-    './error.vue',
+    './error.vue'
   ],
   theme: {
     extend: {
@@ -14,21 +14,21 @@ export default {
         primary: {
           light: '#E8F5E9',
           DEFAULT: '#81C784',
-          dark: '#4CAF50',
+          dark: '#4CAF50'
         },
         neutral: {
           light: '#FAFAFA',
           DEFAULT: '#F5F5F5',
-          dark: '#EEEEEE',
-        },
+          dark: '#EEEEEE'
+        }
       },
       fontFamily: {
-        sans: ['Noto Sans JP', 'sans-serif'],
+        sans: ['Noto Sans JP', 'sans-serif']
       },
       boxShadow: {
-        soft: '0 2px 15px rgba(0, 0, 0, 0.05)',
-      },
-    },
+        soft: '0 2px 15px rgba(0, 0, 0, 0.05)'
+      }
+    }
   },
-  plugins: [],
+  plugins: []
 }

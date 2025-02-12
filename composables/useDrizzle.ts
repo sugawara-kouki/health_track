@@ -20,6 +20,6 @@ export const useDrizzle = () => {
   }
   return {
     db,
-    closeConnectionPool,
+    closeConnectionPool
   }
 }

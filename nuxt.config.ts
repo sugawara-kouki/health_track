@@ -3,13 +3,13 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     '@nuxt/eslint',
     '@vueuse/nuxt',
-    '@clerk/nuxt',
+    '@clerk/nuxt'
   ],
   components: [
     {
       path: '@/components',
-      pathPrefix: false,
-    },
+      pathPrefix: false
+    }
   ],
   devtools: { enabled: true },
   app: {
@@ -18,17 +18,17 @@ export default defineNuxtConfig({
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        { name: 'description', content: '体重管理と健康記録のためのツール' },
+        { name: 'description', content: '体重管理と健康記録のためのツール' }
       ],
       link: [
         { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
         { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
-        { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap' },
-      ],
-    },
+        { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap' }
+      ]
+    }
   },
   runtimeConfig: {
-    databaseUrl: 'mysql://root:root@localhost:3306/demo',
+    databaseUrl: 'mysql://root:root@localhost:3306/demo'
   },
   compatibilityDate: '2024-11-01',
   eslint: {
@@ -37,13 +37,13 @@ export default defineNuxtConfig({
         arrowParens: true,
         blockSpacing: true,
         braceStyle: 'stroustrup',
-        commaDangle: 'always',
+        commaDangle: 'never',
         flat: true,
         indent: 2,
         quoteProps: 'as-needed',
         quotes: 'single',
-        semi: false,
-      },
-    },
-  },
+        semi: false
+      }
+    }
+  }
 })

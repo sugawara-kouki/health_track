@@ -4,7 +4,7 @@
     <aside
       :class="[
         'fixed md:static inset-y-0 left-0 z-50 w-64 transform transition-transform duration-300 ease-in-out',
-        isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0',
+        isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
       ]"
     >
       <div class="h-full bg-white border-r border-neutral flex flex-col">
@@ -60,65 +60,48 @@
             </svg>
             <span class="ml-3">体重記録</span>
           </NuxtLink>
-          <SignedIn>
-            <SignOutButton
-              redirect-url="/dashboard"
+          <SignOutButton
+            redirect-url="/"
+          >
+            <button
+              class="w-full flex items-center px-4 py-3 text-gray-600 rounded-lg hover:bg-primary-light hover:text-primary-dark transition-colors duration-200"
             >
-              <button
-                class="w-full flex items-center px-4 py-3 text-gray-600 rounded-lg hover:bg-primary-light hover:text-primary-dark transition-colors duration-200"
+              <svg
+                class="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
               >
-                <svg
-                  class="w-5 h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
-                  />
-                </svg>
-                <span class="ml-3">ログアウト</span>
-              </button>
-            </SignOutButton>
-          </SignedIn>
-          <SignedOut>
-            <SignInButton
-              mode="modal"
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+                />
+              </svg>
+              <span class="ml-3">ログアウト</span>
+            </button>
+          </SignOutButton>
+          <div
+            class="flex items-center px-4 py-3 text-gray-600 rounded-lg"
+            active-class="bg-primary-light text-primary-dark font-medium"
+          >
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
             >
-              <button
-                class="w-full flex items-center px-4 py-3 text-gray-600 rounded-lg hover:bg-primary-light hover:text-primary-dark transition-colors duration-200"
-              >
-                <svg
-                  class="w-5 h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"
-                  />
-                </svg>
-                <span class="ml-3">ログイン</span>
-              </button>
-            </SignInButton>
-          </SignedOut>
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 14c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-4.42 0-8 2.58-8 6v1h16v-1c0-3.42-3.58-6-8-6z"
+              />
+            </svg>
+            <span class="ml-3">{{ user?.fullName }}</span>
+          </div>
         </nav>
-        <SignedIn>
-          <nav class="flex-1 px-4 pt-4 space-y-1 item-end">
-            <div
-              class="flex items-center px-4 py-3 text-gray-600 rounded-lg hover:bg-primary-light hover:text-primary-dark transition-colors duration-200"
-              active-class="bg-primary-light text-primary-dark font-medium"
-            >
-              <UserButton />
-            </div>
-          </nav>
-        </SignedIn>
       </div>
     </aside>
 
@@ -162,4 +145,5 @@
 
 <script setup lang="ts">
 const isMobileMenuOpen = ref(false)
+const { user } = useUser()
 </script>

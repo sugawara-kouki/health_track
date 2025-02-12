@@ -9,7 +9,7 @@
       block ? 'w-full' : '',
       size === 'sm' ? 'px-4 py-2 text-sm' : '',
       size === 'md' ? 'px-6 py-2.5' : '',
-      size === 'lg' ? 'px-8 py-3 text-lg' : '',
+      size === 'lg' ? 'px-8 py-3 text-lg' : ''
     ]"
     @click="$emit('click')"
   >

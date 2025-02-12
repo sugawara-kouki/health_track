@@ -13,7 +13,7 @@
         :required="required"
         :placeholder="placeholder"
         class="block w-full px-4 py-2.5 rounded-lg border border-neutral-dark focus:border-primary focus:ring-1 focus:ring-primary text-gray-800"
-        @input="$emit('update:modelValue', $event.target.value)"
+        @input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)"
       >
     </div>
   </div>
@@ -31,11 +31,11 @@ const props = defineProps<{
 }>()
 
 const emit = defineEmits<{
-  'update:modelValue': [value: string]
+  'update:modelValue': [value: string | number]
 }>()
 
 const inputValue = computed({
   get: () => props.modelValue,
-  set: value => emit('update:modelValue', value),
+  set: (value) => emit('update:modelValue', value)
 })
 </script>

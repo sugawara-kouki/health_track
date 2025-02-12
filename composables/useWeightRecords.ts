@@ -46,7 +46,7 @@ export const useWeightRecords = () => {
     return {
       value: Number(ratio.toFixed(1)),
       direction: ratio > 0 ? 'up' : ratio < 0 ? 'down' : 'same',
-      color: ratio > 0 ? 'text-red-500' : ratio < 0 ? 'text-green-500' : 'text-gray-500',
+      color: ratio > 0 ? 'text-red-500' : ratio < 0 ? 'text-green-500' : 'text-gray-500'
     }
   }
 
@@ -64,7 +64,7 @@ export const useWeightRecords = () => {
         weight: Number((70 + Math.random() * 2 - 1).toFixed(1)),
         date: date.toISOString().split('T')[0],
         created_at: date.toISOString(),
-        memo: i % 3 === 0 ? 'ジョギング30分' : undefined,
+        memo: i % 3 === 0 ? 'ジョギング30分' : undefined
       })
     }
 
@@ -89,7 +89,7 @@ export const useWeightRecords = () => {
     else {
       weightTarget.value = {
         target_weight: 65.0,
-        updated_at: new Date().toISOString(),
+        updated_at: new Date().toISOString()
       }
       localStorage.setItem('weightTarget', JSON.stringify(weightTarget.value))
     }
@@ -104,7 +104,7 @@ export const useWeightRecords = () => {
   const saveUserProfile = (height: number) => {
     userProfile.value = {
       height: Number(height.toFixed(1)),
-      updated_at: new Date().toISOString(),
+      updated_at: new Date().toISOString()
     }
     localStorage.setItem('userProfile', JSON.stringify(userProfile.value))
   }
@@ -116,7 +116,7 @@ export const useWeightRecords = () => {
       weight: Number(weight.toFixed(1)),
       date,
       created_at: new Date().toISOString(),
-      memo,
+      memo
     }
     weightRecords.value.push(newRecord)
     localStorage.setItem('weightRecords', JSON.stringify(weightRecords.value))
@@ -124,7 +124,7 @@ export const useWeightRecords = () => {
 
   // Delete weight record
   const deleteWeightRecord = (id: string) => {
-    weightRecords.value = weightRecords.value.filter(record => record.id !== id)
+    weightRecords.value = weightRecords.value.filter((record) => record.id !== id)
     localStorage.setItem('weightRecords', JSON.stringify(weightRecords.value))
   }
 
@@ -132,7 +132,7 @@ export const useWeightRecords = () => {
   const saveTargetWeight = (target_weight: number) => {
     weightTarget.value = {
       target_weight: Number(target_weight.toFixed(1)),
-      updated_at: new Date().toISOString(),
+      updated_at: new Date().toISOString()
     }
     localStorage.setItem('weightTarget', JSON.stringify(weightTarget.value))
   }
@@ -157,7 +157,7 @@ export const useWeightRecords = () => {
         ratio,
         targetDiff,
         bmi,
-        bmiEvaluation,
+        bmiEvaluation
       }
     })
   })
@@ -168,7 +168,7 @@ export const useWeightRecords = () => {
     startDate.setDate(startDate.getDate() - days)
 
     return weightRecords.value
-      .filter(record => new Date(record.date) >= startDate)
+      .filter((record) => new Date(record.date) >= startDate)
       .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
   }
 
@@ -184,6 +184,6 @@ export const useWeightRecords = () => {
     recentRecords,
     getFilteredRecords,
     calculateBMI,
-    evaluateBMI,
+    evaluateBMI
   }
 }

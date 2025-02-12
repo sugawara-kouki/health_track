@@ -14,7 +14,7 @@
               'px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200',
               selectedPeriod === period.value
                 ? 'bg-primary text-white'
-                : 'bg-neutral hover:bg-neutral-dark text-gray-600',
+                : 'bg-neutral hover:bg-neutral-dark text-gray-600'
             ]"
             @click="selectedPeriod = period.value"
           >
@@ -96,6 +96,8 @@ import {
   Title,
   Tooltip,
   Legend,
+  type TooltipItem,
+  type ChartOptions
 } from 'chart.js'
 
 ChartJS.register(
@@ -105,23 +107,40 @@ ChartJS.register(
   LineElement,
   Title,
   Tooltip,
-  Legend,
+  Legend
 )
 
 definePageMeta({
   layout: 'auth',
+  middleware: ['auth']
 })
 
 const periods = [
   { label: '1ヶ月', value: 30 },
   { label: '3ヶ月', value: 90 },
-  { label: '6ヶ月', value: 180 },
+  { label: '6ヶ月', value: 180 }
 ]
 
+interface ChartData {
+  labels: string[]
+  datasets: {
+    label: string
+    data: number[]
+    borderColor: string
+    backgroundColor: string
+    tension: number
+    fill: boolean
+    pointBackgroundColor: string
+    pointBorderColor: string
+    pointBorderWidth: number
+    pointRadius: number
+    pointHoverRadius: number
+  }[]
+}
 const selectedPeriod = ref(30)
 const { weightRecords, loadData, deleteWeightRecord, getFilteredRecords } = useWeightRecords()
 
-const chartData = ref({
+const chartData = ref<ChartData>({
   labels: [],
   datasets: [
     {
@@ -135,17 +154,17 @@ const chartData = ref({
       pointBorderColor: '#fff',
       pointBorderWidth: 2,
       pointRadius: 4,
-      pointHoverRadius: 6,
-    },
-  ],
+      pointHoverRadius: 6
+    }
+  ]
 })
 
-const chartOptions = {
+const chartOptions: ChartOptions<'line'> = {
   responsive: true,
   maintainAspectRatio: false,
   plugins: {
     legend: {
-      display: false,
+      display: false
     },
     tooltip: {
       backgroundColor: 'rgba(255, 255, 255, 0.9)',
@@ -156,39 +175,39 @@ const chartOptions = {
       padding: 12,
       displayColors: false,
       callbacks: {
-        label: context => `${context.parsed.y.toFixed(1)} kg`,
-      },
-    },
+        label: (context: TooltipItem<'line'>) => `${context.parsed.y.toFixed(1)} kg`
+      }
+    }
   },
   scales: {
     y: {
       beginAtZero: false,
       grid: {
-        color: '#f0f0f0',
+        color: '#f0f0f0'
       },
       ticks: {
-        callback: (value: number) => value.toFixed(1),
-      },
+        callback: (value) => Number(value).toFixed(1)
+      }
     },
     x: {
       grid: {
-        display: false,
-      },
-    },
+        display: false
+      }
+    }
   },
   interaction: {
     intersect: false,
-    mode: 'index',
-  },
+    mode: 'index'
+  }
 }
 
 const updateChartData = () => {
   const filteredRecords = getFilteredRecords(selectedPeriod.value)
   chartData.value = {
-    labels: filteredRecords.map(record => formatDate(record.date)),
+    labels: filteredRecords.map((record) => formatDate(record.date)),
     datasets: [{
       label: '体重 (kg)',
-      data: filteredRecords.map(record => Number(record.weight.toFixed(1))),
+      data: filteredRecords.map((record) => Number(record.weight.toFixed(1))),
       borderColor: '#81C784',
       backgroundColor: 'rgba(129, 199, 132, 0.1)',
       tension: 0.4,
@@ -197,8 +216,8 @@ const updateChartData = () => {
       pointBorderColor: '#fff',
       pointBorderWidth: 2,
       pointRadius: 4,
-      pointHoverRadius: 6,
-    }],
+      pointHoverRadius: 6
+    }]
   }
 }
 

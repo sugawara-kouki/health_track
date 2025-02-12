@@ -7,7 +7,7 @@ async function main() {
   const user: typeof users.$inferInsert = {
     name: 'John',
     age: 30,
-    email: 'john@example.com',
+    email: 'john@example.com'
   }
   try {
     await db.insert(users).values(user)
