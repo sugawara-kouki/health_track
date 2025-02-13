@@ -8,6 +8,7 @@
     </div>
 
     <WeightTable />
+    Height: {{ height }}
   </div>
 </template>
 
@@ -17,8 +18,10 @@ definePageMeta({
   middleware: ['auth']
 })
 
-const { loadData, userProfile } = useWeightRecords()
+const { user } = useUser()
+const { loadData, userProfile, getHeight, height } = useWeightRecords()
 const showHeightModal = ref(!userProfile.value?.height)
+await getHeight(user.value?.id ?? '')
 
 onMounted(() => {
   loadData()

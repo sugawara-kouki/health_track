@@ -22,6 +22,7 @@ export const useWeightRecords = () => {
   const weightRecords = ref<WeightRecord[]>([])
   const weightTarget = ref<WeightTarget | null>(null)
   const userProfile = ref<UserProfile | null>(null)
+  const height = ref<number | null>(null)
 
   // BMIの計算
   const calculateBMI = (weight: number) => {
@@ -137,6 +138,28 @@ export const useWeightRecords = () => {
     localStorage.setItem('weightTarget', JSON.stringify(weightTarget.value))
   }
 
+  // 身長データの取得
+  const getHeight = async (id: string) => {
+    try {
+      const { data, error: fetchError } = await useFetch('/api/height', {
+        params: {
+          userId: id
+        }
+      })
+
+      if (fetchError.value || !data.value?.data) {
+        throw new Error(fetchError.value?.message)
+      }
+
+      console.log(data.value.data)
+      height.value = (data.value.data as { height: number }).height
+    }
+    catch (error) {
+      console.error('error:', error)
+      throw new Error(`${error}`)
+    }
+  }
+
   // Get recent records with additional info
   const recentRecords = computed(() => {
     const records = [...weightRecords.value]
@@ -184,6 +207,8 @@ export const useWeightRecords = () => {
     recentRecords,
     getFilteredRecords,
     calculateBMI,
-    evaluateBMI
+    evaluateBMI,
+    height,
+    getHeight
   }
 }

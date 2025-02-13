@@ -28,7 +28,7 @@ export default defineNuxtConfig({
     }
   },
   runtimeConfig: {
-    databaseUrl: 'mysql://root:root@localhost:3306/demo'
+    databaseUrl: process.env.DATABASE_URL
   },
   compatibilityDate: '2024-11-01',
   eslint: {

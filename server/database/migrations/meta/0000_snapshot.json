@@ -1,7 +1,7 @@
 {
   "version": "5",
   "dialect": "mysql",
-  "id": "72d74d49-7c28-4b25-b747-caefc05e98a6",
+  "id": "476c056a-e7e5-48e2-8df9-21f9b5855f2c",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "users": {
@@ -9,31 +9,34 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "serial",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": true
-        },
-        "name": {
-          "name": "name",
           "type": "varchar(255)",
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false
         },
-        "age": {
-          "name": "age",
-          "type": "int",
+        "height": {
+          "name": "height",
+          "type": "float",
           "primaryKey": false,
-          "notNull": true,
+          "notNull": false,
           "autoincrement": false
         },
-        "email": {
-          "name": "email",
-          "type": "varchar(255)",
+        "createdAt": {
+          "name": "createdAt",
+          "type": "timestamp",
           "primaryKey": false,
           "notNull": true,
-          "autoincrement": false
+          "autoincrement": false,
+          "default": "(now())"
+        },
+        "updatedAt": {
+          "name": "updatedAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false,
+          "onUpdate": true,
+          "default": "(now())"
         }
       },
       "indexes": {},
@@ -46,14 +49,90 @@
           ]
         }
       },
-      "uniqueConstraints": {
-        "users_email_unique": {
-          "name": "users_email_unique",
+      "uniqueConstraints": {},
+      "checkConstraint": {}
+    },
+    "weights": {
+      "name": "weights",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "userId": {
+          "name": "userId",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "weight": {
+          "name": "weight",
+          "type": "float",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "recordedDate": {
+          "name": "recordedDate",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "memo": {
+          "name": "memo",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "createdAt": {
+          "name": "createdAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "(now())"
+        },
+        "updatedAt": {
+          "name": "updatedAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "onUpdate": true,
+          "default": "(now())"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "weights_userId_users_id_fk": {
+          "name": "weights_userId_users_id_fk",
+          "tableFrom": "weights",
+          "tableTo": "users",
+          "columnsFrom": [
+            "userId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "weights_id": {
+          "name": "weights_id",
           "columns": [
-            "email"
+            "id"
           ]
         }
       },
+      "uniqueConstraints": {},
       "checkConstraint": {}
     }
   },
