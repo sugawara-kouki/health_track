@@ -7,9 +7,9 @@ export interface getHeightParams {
 }
 
 export default defineEventHandler(async (event) => {
-  const params = getQuery<getHeightParams>(event)
+  const userId = event.context.auth.userId as string
 
-  if (!params.userId) {
+  if (!userId) {
     return {
       statusCode: 400,
       data: [],
@@ -18,7 +18,7 @@ export default defineEventHandler(async (event) => {
   }
 
   try {
-    const userHeights = await db.select({ height: users.height }).from(users).where(eq(users.id, params.userId)).limit(1)
+    const userHeights = await db.select({ height: users.height }).from(users).where(eq(users.id, userId)).limit(1)
 
     if (!userHeights || userHeights.length < 1) {
       return {

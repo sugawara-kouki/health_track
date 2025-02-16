@@ -139,19 +139,14 @@ export const useWeightRecords = () => {
   }
 
   // 身長データの取得
-  const getHeight = async (id: string) => {
+  const getHeight = async () => {
     try {
-      const { data, error: fetchError } = await useFetch('/api/height', {
-        params: {
-          userId: id
-        }
-      })
+      const { data, error: fetchError } = await useFetch('/api/height')
 
       if (fetchError.value || !data.value?.data) {
         throw new Error(fetchError.value?.message)
       }
 
-      console.log(data.value.data)
       height.value = (data.value.data as { height: number }).height
     }
     catch (error) {
